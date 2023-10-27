@@ -1,5 +1,5 @@
 program SimpleCalculator;
-uses crt;
+uses crt, Math;
 var
   num1, num2, result: real;
   choice: char;
@@ -9,7 +9,7 @@ var
 begin
   clrscr;
   writeln('Welcome to Simple Calculator');
-  
+
   repeat
     write('Enter the first number: ');
     readln(input);
@@ -32,6 +32,8 @@ begin
     writeln('B: Subtraction');
     writeln('C: Multiplication');
     writeln('D: Division');
+    writeln('E: Exponent (First number to the power of the second number)');
+    writeln('F: Root (Square root of the first number, second number times)');
     readln(choice);
 
     case choice of
@@ -60,8 +62,23 @@ begin
             validChoice := True;
           end;
         end;
+      'E','e':
+        begin
+          result := Power(num1, num2);
+          validChoice := True;
+        end;
+      'F','f':
+        begin
+          if num1 < 0 then
+            writeln('Cannot calculate the square root of a negative number.')
+          else
+          begin
+            result := Power(num1, 1 / num2);
+            validChoice := True;
+          end;
+        end;
     else
-      writeln('Invalid choice. Please enter A, B, C, or D.');
+      writeln('Invalid choice. Please enter A, B, C, D, E, or F.');
     end;
   end;
 
